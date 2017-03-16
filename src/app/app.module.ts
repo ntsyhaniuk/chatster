@@ -1,33 +1,24 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-
-import { AlertModule } from 'ng2-bootstrap';
-import { CoreModule } from './core/core.module';
+import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { SharedModule } from './shared/shared.module';
-import { AuthModule } from './auth/auth.module';
-import { ChatsModule } from './chats/chats.module';
+import { CoreModule } from './core/core.module';
+import {AlertModule} from "ng2-bootstrap";
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home.component';
+import { PageNotFoundComponent } from './not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    HttpModule,
-    AlertModule.forRoot(),
     CoreModule,
     AppRoutingModule,
-    SharedModule,
-    AuthModule,
-    ChatsModule
+    AlertModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
