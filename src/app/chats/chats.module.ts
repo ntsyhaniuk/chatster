@@ -6,7 +6,7 @@ import { ChatDetailsComponent } from './chat-details';
 import { ChatNewComponent } from './chat-new';
 import { ChatHolderComponent } from './chat-holder';
 import { ChatsRoutingModule } from './chats-routing.module';
-import { MessagesSharingModule } from '../messages';
+import { MessagesSharedModule } from '../messages';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,7 @@ import { MessagesSharingModule } from '../messages';
   ],
   imports: [
     SharedModule,
-    MessagesSharingModule,
+    MessagesSharedModule,
     ChatsRoutingModule
   ],
   providers: []
