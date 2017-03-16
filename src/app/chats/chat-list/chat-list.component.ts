@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 
 @Component({
   selector: 'ct-chat-list',
@@ -7,5 +8,14 @@ import { Component } from '@angular/core';
 })
 
 export class ChatListComponent {
+  selectedId: number;
+  constructor(private route: ActivatedRoute,
+              private router: Router) {
 
+  }
+
+  select(chat) {
+    this.selectedId = chat.id;
+    this.router.navigate(['chat', chat.id]);
+  }
 }

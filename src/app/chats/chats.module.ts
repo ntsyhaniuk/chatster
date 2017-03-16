@@ -1,14 +1,27 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
+import { SharedModule } from '../shared';
 import { ChatsComponent } from './chats.component';
-import { ChatListComponent } from './chat-list/chat-list.component';
-import { ChatDetailsComponent } from './chat-details/chat-details.component';
+import { ChatListComponent } from './chat-list';
+import { ChatDetailsComponent } from './chat-details';
+import { ChatNewComponent } from './chat-new';
+import { ChatHolderComponent } from './chat-holder';
+import { ChatsRoutingModule } from './chats-routing.module';
+import { MessagesSharingModule } from '../messages';
 
 @NgModule({
-  imports: [CommonModule],
-  declarations: [ChatsComponent, ChatListComponent, ChatDetailsComponent],
-  exports: []
+  declarations: [
+    ChatsComponent,
+    ChatListComponent,
+    ChatDetailsComponent,
+    ChatNewComponent,
+    ChatHolderComponent
+  ],
+  imports: [
+    SharedModule,
+    MessagesSharingModule,
+    ChatsRoutingModule
+  ],
+  providers: []
 })
 
 export class ChatsModule {

@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'ct-messages',
-  templateUrl: './messages.component.html',
-  styleUrls: ['./messages.component.scss']
+  templateUrl: 'messages.component.html',
+  styleUrls: ['messages.component.scss']
 })
 
 export class MessagesComponent {
