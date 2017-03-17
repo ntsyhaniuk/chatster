@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router, Params } from '@angular/router';
+import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { Chat } from '../shared';
 
 @Component({
   selector: 'ct-chat-list',
@@ -8,14 +9,13 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 })
 
 export class ChatListComponent {
-  selectedId: number;
-  constructor(private route: ActivatedRoute,
-              private router: Router) {
+@Input() chats: Promise<Chat[]>;
+
+  constructor(private router: Router) {
 
   }
 
-  select(chat) {
-    this.selectedId = chat.id;
+  select(chat: Chat) {
     this.router.navigate(['chat', chat.id]);
   }
 }
