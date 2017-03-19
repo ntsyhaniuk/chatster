@@ -20,6 +20,7 @@
       "prefix": "",
       "styles": [
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "variables.scss",
         "styles.scss"
       ],
       "scripts": [],
