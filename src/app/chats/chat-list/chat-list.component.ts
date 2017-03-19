@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import { Chat } from '../shared';
+import {Component, Input} from '@angular/core';
+import {Router} from '@angular/router';
+import {Chat} from '../shared';
 
 @Component({
   selector: 'ct-chat-list',
@@ -9,7 +9,8 @@ import { Chat } from '../shared';
 })
 
 export class ChatListComponent {
-@Input() chats: Promise<Chat[]>;
+  @Input() chats: Promise<Chat[]>;
+  isHidden: boolean = false;
 
   constructor(private router: Router) {
 
@@ -17,5 +18,9 @@ export class ChatListComponent {
 
   select(chat: Chat) {
     this.router.navigate(['chat', chat.id]);
+  }
+
+  listToggle() {
+    this.isHidden = !this.isHidden;
   }
 }

@@ -20,7 +20,7 @@
       "prefix": "",
       "styles": [
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
-        "variables.scss",
+        "../node_modules/font-awesome/scss/font-awesome.scss",
         "styles.scss"
       ],
       "scripts": [],

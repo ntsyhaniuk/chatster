@@ -4,4 +4,6 @@ export class Chat {
     attendees: Array<number>;
     creator: number;
     createdAt: Date;
+    status: string;
+    image: string;
 }
