@@ -1,5 +1,19 @@
-<h1>Chat Details</h1>
+<div class="chat-details">
+  <div class="chat-details__header">
+    <div class="message-indicator">
+      <i class="fa fa-envelope" aria-hidden="true"></i>
+    </div>
+    <div class="message-search">
+      <form class="search_form" name="search_form">
+        <input type="text">
+        <i class="fa fa-search" aria-hidden="true"></i>
+      </form>
+    </div>
+    <div class="user-profile">
+      <i class="fa fa-user" aria-hidden="true"></i>
+    </div>
+  </div>
+  <ct-message-list></ct-message-list>
 
-<ct-message-list></ct-message-list>
-
-<ct-message-new></ct-message-new>
+  <ct-message-new></ct-message-new>
+</div>
