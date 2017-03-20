@@ -1,17 +1,9 @@
 .chat-list__wrapper {
-  position: absolute;
   display: flex;
   flex-direction: column;
   background-color: #3b3e99;
-<<<<<<< HEAD
   width: 30vw;
   height: calc(100vh - 80px);
-=======
-  top: 60px;
-  left: 0;
-  bottom: 0;
-  width: 30%;
->>>>>>> d21fb82a466201e3903c00a334d3db094bd98725
   transition: width 0.2s linear;
   .chat-list__header {
     display: flex;
