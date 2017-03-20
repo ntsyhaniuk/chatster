@@ -1,1 +1,43 @@
 <h1>Register page</h1>
+<form novalidate (ngSubmit)="onSubmit(user)" [formGroup]="user">
+  <label>
+    <span>Full name</span>
+    <input
+      type="text"
+      placeholder="Name"
+      formControlName="name">
+      <div *ngIf="user.get('name').hasError('required') && user.get('name').touched">
+    Name is required
+  </div>
+  </label>
+  <label>
+    <span>Email</span>
+    <input
+      type="email"
+      placeholder="Email"
+      formControlName="email">
+      <div *ngIf="user.get('email').hasError('required') && user.get('email').touched">
+    Email is required
+  </div>
+  </label>
+  <div formGroupName="passwords">
+    <label>
+      <span>Password</span>
+      <input
+        type="password"
+        placeholder="password"
+        formControlName="password">
+        <div *ngIf="user.passwords.get('password').hasError('required') && user.passwords.get('password').touched">
+    Password is required
+  </div>
+    </label>
+    <label>
+      <span>Confirm password</span>
+      <input
+        type="password"
+        placeholder="Confirm password"
+        formControlName="confirmPassword">
+    </label>
+  </div>
+  <button type="submit" [disabled]="user.invalid">Sign up</button>
+</form>
