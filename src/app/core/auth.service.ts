@@ -9,6 +9,7 @@ export class AuthService {
         if (user) {
             localStorage.setItem('token', 'you logged');
         }
+        console.log(localStorage.getItem('token'));
     }
     register() {
 

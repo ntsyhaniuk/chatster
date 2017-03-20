@@ -1,1 +1,21 @@
-<h1>Login page</h1>
+<form novalidate #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+  <input
+    type="email"
+    placeholder="Your email"
+    name="email"
+    required
+    ngModel>
+  <div *ngIf="f.controls.email?.invalid && f.controls.email?.touched">
+    Email is required
+  </div>
+  <input
+    type="password"
+    placeholder="Your password"
+    name="password"
+    required
+    ngModel>
+  <div *ngIf="f.controls.password?.invalid && f.controls.password?.touched">
+    Password is required
+  </div>
+  <button type="submit" [disabled]="f.invalid">Login</button>
+</form>
