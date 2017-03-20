@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { FooterComponent } from './footer/footer.component';
+import { AuthService } from './auth.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -19,7 +20,9 @@ import { FooterComponent } from './footer/footer.component';
     NavigationComponent,
     FooterComponent
   ],
-  providers: []
+  providers: [
+    AuthService
+  ]
 })
 
 export class CoreModule {
