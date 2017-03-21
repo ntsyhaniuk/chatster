@@ -5,6 +5,7 @@ import { HeaderComponent } from './header/header.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { FooterComponent } from './footer/footer.component';
 import { AuthService } from './auth.service';
+import { AuthGuard } from './auth-guard.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -21,7 +22,8 @@ import { AuthService } from './auth.service';
     FooterComponent
   ],
   providers: [
-    AuthService
+    AuthService,
+    AuthGuard
   ]
 })
 
