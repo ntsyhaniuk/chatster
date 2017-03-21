@@ -16,7 +16,7 @@
       type="email"
       placeholder="Email"
       formControlName="email">
-      <div *ngIf="user.get('email').hasError('required') && user.get('email').touched">
+      <div *ngIf="(user.get('email').hasError('required') || user.get('email').hasError('validateEmail')) && user.get('email').touched">
     Email is required
   </div>
   </label>
