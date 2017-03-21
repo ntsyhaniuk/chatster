@@ -2,7 +2,8 @@
   <ul class="navigation">
     <a routerLink="/" routerLinkActive="active">Home</a>
     <a routerLink="/chat" routerLinkActive="active">Chats</a>
-    <a routerLink="/auth/login" routerLinkActive="active">Login</a>
+    <a routerLink="/auth/login" routerLinkActive="active" *ngIf="!isLoggedIn()">Login</a>
     <a routerLink="/auth/register" routerLinkActive="active">Register</a>
+    <a routerLink="/home" routerLinkActive="active" *ngIf="isLoggedIn()" (click)="logout()">Logout</a>
   </ul>
 </nav>
