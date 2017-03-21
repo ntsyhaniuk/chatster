@@ -1,8 +1,9 @@
-<h3>MESSAGES LIST</h3>
-<ul>
-    <li *ngFor="let message of messages | async">
-        {{message.text}}
-        <b>Sent at:</b>
-        <span>{{message.sentAt | date:'medium' }}</span>
+<div class="message-list__wrapper">
+  <ul class="message-list__container">
+    <li class="message-item" *ngFor="let message of messages | async; let e = even" [ngClass]="{'interlocutor-message-item': e}">
+      <div class="message-item__photo"></div>
+      <p class="message-item__message">{{message.text}}</p>
+      <p class="message-item__date-time">{{message.sentAt | date:'medium' }}</p>
     </li>
-</ul>
+  </ul>
+</div>

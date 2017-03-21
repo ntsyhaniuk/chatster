@@ -7,7 +7,7 @@ export const MESSAGES: Message[] = [
     senderId: 1,
     isRead: true,
     sentAt: moment().subtract(45, 'minutes').toDate(),
-    text: 'Hello!',
+    text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim voluptatem fugit numquam asperiores ratione accusantium rerum! Facilis aperiam praesentium, molestiae, earum quos dolorem, ab porro quisquam eum aut, odit harum.Hello!',
     chatId: 1
   },
   {
@@ -15,7 +15,7 @@ export const MESSAGES: Message[] = [
     senderId: 1,
     isRead: true,
     sentAt: moment().subtract(20, 'minutes').toDate(),
-    text: 'How are you?',
+    text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim voluptatem fugit numquam asperiores ratione accusantium rerum! Facilis aperiam praesentium, molestiae, earum quos dolorem, ab porro quisquam eum aut, odit harum.How are you?',
     chatId: 1
   },
   {
@@ -23,7 +23,7 @@ export const MESSAGES: Message[] = [
     senderId: 2,
     isRead: true,
     sentAt: moment().subtract(30, 'minutes').toDate(),
-    text: 'Hi man!',
+    text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim voluptatem fugit numquam asperiores ratione accusantium rerum! Facilis aperiam praesentium, molestiae, earum quos dolorem, ab porro quisquam eum aut, odit harum.Hi man!',
     chatId: 1
   },
   {
@@ -44,6 +44,102 @@ export const MESSAGES: Message[] = [
   },
   {
     id: 6,
+    senderId: 4,
+    isRead: true,
+    sentAt: moment().subtract(3, 'minutes').toDate(),
+    text: `Ok, I will be here in 20 minutes!`,
+    chatId: 2
+  },
+  {
+    id: 7,
+    senderId: 1,
+    isRead: true,
+    sentAt: moment().subtract(45, 'minutes').toDate(),
+    text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim voluptatem fugit numquam asperiores ratione accusantium rerum! Facilis aperiam praesentium, molestiae, earum quos dolorem, ab porro quisquam eum aut, odit harum.Hello!',
+    chatId: 1
+  },
+  {
+    id: 8,
+    senderId: 1,
+    isRead: true,
+    sentAt: moment().subtract(20, 'minutes').toDate(),
+    text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim voluptatem fugit numquam asperiores ratione accusantium rerum! Facilis aperiam praesentium, molestiae, earum quos dolorem, ab porro quisquam eum aut, odit harum.How are you?',
+    chatId: 1
+  },
+  {
+    id: 9,
+    senderId: 2,
+    isRead: true,
+    sentAt: moment().subtract(30, 'minutes').toDate(),
+    text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim voluptatem fugit numquam asperiores ratione accusantium rerum! Facilis aperiam praesentium, molestiae, earum quos dolorem, ab porro quisquam eum aut, odit harum.Hi man!',
+    chatId: 1
+  },
+  {
+    id: 10,
+    senderId: 2,
+    isRead: true,
+    sentAt: moment().subtract(15, 'minutes').toDate(),
+    text: `I\'m fine, thanks!`,
+    chatId: 1
+  },
+  {
+    id: 11,
+    senderId: 3,
+    isRead: true,
+    sentAt: moment().subtract(5, 'minutes').toDate(),
+    text: `I\'ll wait you near street at 5 o\'clock`,
+    chatId: 2
+  },
+  {
+    id: 12,
+    senderId: 4,
+    isRead: true,
+    sentAt: moment().subtract(3, 'minutes').toDate(),
+    text: `Ok, I will be here in 20 minutes!`,
+    chatId: 2
+  },
+  {
+    id: 13,
+    senderId: 1,
+    isRead: true,
+    sentAt: moment().subtract(45, 'minutes').toDate(),
+    text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim voluptatem fugit numquam asperiores ratione accusantium rerum! Facilis aperiam praesentium, molestiae, earum quos dolorem, ab porro quisquam eum aut, odit harum.Hello! How are you? Hello! How are you? Hello! How are you? Hello! How are you? Hello! How are you?',
+    chatId: 1
+  },
+  {
+    id: 14,
+    senderId: 1,
+    isRead: true,
+    sentAt: moment().subtract(20, 'minutes').toDate(),
+    text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim voluptatem fugit numquam asperiores ratione accusantium rerum! Facilis aperiam praesentium, molestiae, earum quos dolorem, ab porro quisquam eum aut, odit harum.How are you?',
+    chatId: 1
+  },
+  {
+    id: 15,
+    senderId: 2,
+    isRead: true,
+    sentAt: moment().subtract(30, 'minutes').toDate(),
+    text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim voluptatem fugit numquam asperiores ratione accusantium rerum! Facilis aperiam praesentium, molestiae, earum quos dolorem, ab porro quisquam eum aut, odit harum.Hi man!',
+    chatId: 1
+  },
+  {
+    id: 16,
+    senderId: 2,
+    isRead: true,
+    sentAt: moment().subtract(15, 'minutes').toDate(),
+    text: `I\'m fine, thanks!`,
+    chatId: 1
+  },
+  {
+    id: 17,
+    senderId: 3,
+    isRead: true,
+    sentAt: moment().subtract(5, 'minutes').toDate(),
+    text: `I\'ll wait you near street at 5 o\'clock`,
+    chatId: 2
+  },
+  {
+    id: 1,
     senderId: 4,
     isRead: true,
     sentAt: moment().subtract(3, 'minutes').toDate(),
