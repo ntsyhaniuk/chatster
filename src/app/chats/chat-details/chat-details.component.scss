@@ -2,8 +2,6 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  min-width: 70vw;
-  max-width: calc(100vw - 80px);
   transition: all 300ms;
   .chat-details__header{
     display: flex;
