@@ -2,11 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterTextComponent } from './filter-text.component';
+import { ButtonsModule, AlertModule } from 'ng2-bootstrap';
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    ButtonsModule.forRoot(),
+    AlertModule.forRoot()
   ],
   exports: [
     CommonModule,

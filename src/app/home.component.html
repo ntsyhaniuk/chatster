@@ -1,0 +1,17 @@
+<div class="home-wrapper">
+  <div class="home-welcome">
+    <h1>Welcome to</h1>
+    <img src="/src/assets/images/logo_dark.png" alt="logo">
+    <h2 *ngIf="!isLoggedIn()">To start using service:</h2>
+  </div>
+  <div class="home-actions" *ngIf="!isLoggedIn()">
+    <div class="home-login">
+      <h3>If you have an account - please Log In</h3>
+      <button class="action-button" routerLink="/auth/login">LOG IN</button>
+    </div>
+    <div class="home-register">
+      <h3>If you haven't - please Register</h3>
+      <button class="action-button" routerLink="/auth/register">REGISTER</button>
+    </div>
+  </div>
+</div>
