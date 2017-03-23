@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {CustomEmailValidator} from "../../shared/directives/email-validator.directive";
+import { CustomEmailValidator } from "../../shared/validators/email-validator.directive";
 
 @Component({
   selector: 'ct-register',
