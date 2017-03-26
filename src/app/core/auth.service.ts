@@ -12,9 +12,13 @@ export class AuthService {
     get isLoggedIn() {
         return localStorage.getItem('token');
     }
-    login(user) {
+    login(user, from) {
         if (user) {
-            localStorage.setItem('token', 'you logged');
+          if (from && from == 'google') {
+            localStorage.setItem('token', user.U3);
+          } else {
+            localStorage.setItem('token', user.email);
+          }
             this.router.navigate(['/chat']);
         }
 

@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { User } from './login.interface';
 import { AuthService } from '../../core/auth.service';
+import { config } from '../../../localConfig';
+declare const gapi: any;
 
 @Component({
   selector: 'ct-login',
@@ -14,10 +16,34 @@ export class LoginComponent implements OnInit {
     password: ''
   };
   onSubmit(formData) {
-    this.authService.login(formData);
+    console.log(formData);
+    this.authService.login(formData, 'custom');
   }
-  constructor (private authService: AuthService) {}
-  ngOnInit() {
+  constructor (private authService: AuthService, private zone: NgZone) {}
 
+  ngOnInit() {
+    gapi.load('auth2', () => {
+      let auth2 = gapi.auth2.init({
+        client_id: config.GOOGLE_API.CLIENT_ID,
+        cookiepolicy: config.GOOGLE_API.COOKIE_POLICY
+      });
+      auth2.attachClickHandler(
+        document.getElementById('google-auth-btn'), {},
+        this.onSuccess.bind(this),
+        this.onFailure
+      )
+    })
+  }
+
+  onFailure(e) {
+    console.log(e)
+  }
+
+  onSuccess(user): void {
+    this.zone.run(() => {
+      let loggedUser = user.getBasicProfile();
+      console.log(loggedUser);
+      this.authService.login(loggedUser, 'google');
+    })
   }
 }
