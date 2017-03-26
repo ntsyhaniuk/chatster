@@ -6,4 +6,5 @@
     <a routerLink="/auth/register" routerLinkActive="active" *ngIf="!isLoggedIn()">Register</a>
     <a routerLink="/home" routerLinkActive="active" *ngIf="isLoggedIn()" (click)="logout()">Logout</a>
   </ul>
+  <user-profile *ngIf="isLoggedIn()"></user-profile>
 </nav>

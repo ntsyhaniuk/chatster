@@ -1,10 +1,15 @@
-.navigation{
-  height: 100%;
-  margin-right: 20px;
-  a{
-    color: #fff;
-    font-size: 18px;
-    margin: 0 15px;
-    text-decoration: none;
+nav{
+  display: flex;
+  align-items: center;
+  padding-right: 10px;
+  .navigation{
+    height: 100%;
+    margin-right: 20px;
+    a{
+      color: #fff;
+      font-size: 18px;
+      margin: 0 15px;
+      text-decoration: none;
+    }
   }
 }

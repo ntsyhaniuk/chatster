@@ -36,13 +36,14 @@ export class LoginComponent implements OnInit {
   }
 
   onFailure(e) {
-    console.log(e)
+    console.log(e.error)
   }
 
   onSuccess(user): void {
     this.zone.run(() => {
-      let loggedUser = user.getBasicProfile();
-      console.log(loggedUser);
+      let authData = user.getAuthResponse(),
+          loggedUser = user.getBasicProfile();
+      loggedUser.token = authData.id_token;
       this.authService.login(loggedUser, 'google');
     })
   }

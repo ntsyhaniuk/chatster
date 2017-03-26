@@ -11,8 +11,9 @@
         type="text"
         placeholder="Name"
         formControlName="name" required>
-      <div class="alert alert-danger" *ngIf="user.get('name').hasError('required') && user.get('name').touched">
-        Name is required
+      <div class="alert alert-danger" *ngIf="user.get('name').invalid && user.get('name').touched">
+        <p *ngIf="user.get('name').hasError('required')">Name is required</p>
+        <p *ngIf="user.get('name').hasError('minlength')">Min. length - 2 characters</p>
       </div>
     </div>
     <div class="form-group">
@@ -45,9 +46,9 @@
             type="password"
             placeholder="password"
             formControlName="password" required>
-          <div class="alert alert-danger"
-            *ngIf="user.get('passwords').get('password').hasError('required') && user.get('passwords').get('password').touched">
-            Password is required
+          <div class="alert alert-danger" *ngIf="user.get('passwords').get('password').invalid && user.get('passwords').get('password').touched">
+            <p *ngIf="user.get('passwords').get('password').hasError('required')">Password is required</p>
+            <p *ngIf="user.get('passwords').get('password').hasError('minlength')">Too short. Min length - 8 characters</p>
           </div>
       </div>
       <div class="form-group">
@@ -60,14 +61,11 @@
             type="password"
             placeholder="Confirm password"
             formControlName="confirmPassword" required>
-          <div class="alert alert-danger"
-            *ngIf="user.get('passwords').get('confirmPassword').hasError('required') && user.get('passwords').get('confirmPassword').touched">
-            Password confirmation is required
+          <div class="alert alert-danger" *ngIf="user.get('passwords').invalid && user.get('passwords').get('confirmPassword').touched">
+            <p *ngIf="user.get('passwords').get('confirmPassword').hasError('required')">Password confirmation is required</p>
+            <p *ngIf="user.get('passwords').get('confirmPassword').hasError('minlength')">Too short. Min length - 8 characters</p>
+            <p *ngIf="user.get('passwords').hasError('notSamePassword')"> Passwords do not match</p>
           </div>
-      </div>
-      <div class="alert alert-danger"
-           *ngIf="user.get('passwords').hasError('notSamePassword')">
-        Passwords do not match
       </div>
     </div>
     <button class="btn btn-success" type="submit" [disabled]="user.invalid">Sign up</button>

@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { FooterComponent } from './footer/footer.component';
+import { UserProfileComponent } from './profile';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth-guard.service';
 @NgModule({
@@ -14,12 +15,14 @@ import { AuthGuard } from './auth-guard.service';
   declarations: [
     HeaderComponent,
     NavigationComponent,
-    FooterComponent
+    FooterComponent,
+    UserProfileComponent
   ],
   exports: [
     HeaderComponent,
     NavigationComponent,
-    FooterComponent
+    FooterComponent,
+    UserProfileComponent
   ],
   providers: [
     AuthService,

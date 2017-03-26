@@ -1,0 +1,23 @@
+.user-profile__wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .user-profile__photo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    color: rgb(255, 255, 255);
+    font-size: 24px;
+    background-color: rgba(0, 0, 0, 0.5);
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    background-size: cover !important;
+  }
+  .user-profile__name{
+    color: rgb(255, 255, 255);
+    font-weight: 700;
+  }
+}
