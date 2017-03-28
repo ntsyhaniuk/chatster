@@ -12,6 +12,7 @@
         placeholder="Your email"
         name="email"
         required
+        pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
         ngModel>
       <div class="alert alert-danger"
         *ngIf="f.controls.email?.invalid && f.controls.email?.touched">

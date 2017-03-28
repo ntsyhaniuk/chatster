@@ -1,5 +1,8 @@
-import { Component, OnInit, NgZone } from '@angular/core';
-import { User } from './login.interface';
+import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subscription } from "rxjs";
+
+import { User } from './login-user.interface';
 import { AuthService } from '../../core/auth.service';
 import { config } from '../../../localConfig';
 declare const gapi: any;
@@ -10,16 +13,13 @@ declare const gapi: any;
   styleUrls: ['./login.component.scss']
 })
 
-export class LoginComponent implements OnInit {
-  user: User = {
-    email: '',
-    password: ''
-  };
-  onSubmit(formData) {
-    console.log(formData);
-    this.authService.login(formData, 'custom');
-  }
-  constructor (private authService: AuthService, private zone: NgZone) {}
+export class LoginComponent implements OnInit, OnDestroy {
+
+  constructor (private authService: AuthService, private zone: NgZone, private router: Router) {}
+
+
+  private subscriptions: Subscription[] = [];
+
 
   ngOnInit() {
     gapi.load('auth2', () => {
@@ -29,22 +29,58 @@ export class LoginComponent implements OnInit {
       });
       auth2.attachClickHandler(
         document.getElementById('google-auth-btn'), {},
-        this.onSuccess.bind(this),
-        this.onFailure
+        this.onAuthSuccess.bind(this),
+        this.onAuthFailure
       )
     })
   }
 
-  onFailure(e) {
-    console.log(e.error)
+  onSubmit(formData) {
+    let user: User = {
+      username: formData.email,
+      pass: formData.password
+    };
+    this.subscriptions.push(
+      this.authService
+        .login(user, 'custom')
+        .subscribe(this.onLoginSuccess.bind(this), this.onLoginError)
+    );
   }
 
-  onSuccess(user): void {
+  onLoginSuccess(user): void {
+    console.log(user);
+    this.authService.setUserState(user);
+    this.router.navigate(['/chat']);
+  }
+
+  onLoginError(e): void {
+
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.map(subscription => subscription.unsubscribe());
+  }
+
+  onAuthFailure(e) {
+    console.error(e.error);
+  }
+
+  onAuthSuccess(user): void {
     this.zone.run(() => {
+      let self = this;
       let authData = user.getAuthResponse(),
           loggedUser = user.getBasicProfile();
       loggedUser.token = authData.id_token;
-      this.authService.login(loggedUser, 'google');
+      this.authService
+        .login(loggedUser, 'google')
+        .subscribe(
+          (user): void => {
+            console.log('from auth');
+            console.log(user);
+            this.authService.setUserState(user);
+            this.router.navigate(['/chat']);
+          }
+        )
     })
   }
 }
