@@ -1,5 +1,5 @@
 <div class="user-profile__wrapper">
-  <div class="user-profile__photo" *ngIf="profile?.photo" [style.background]="'url('+profile?.photo+')'">
+  <div class="user-profile__photo" *ngIf="profile?.photo" [style.background]="'url('+(profile?.photo)+')'">
   </div>
   <div class="user-profile__photo" *ngIf="!profile?.photo">
     <i class="fa fa-user" aria-hidden="true"></i>
