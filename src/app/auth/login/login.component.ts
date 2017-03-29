@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       auth2.attachClickHandler(
         document.getElementById('google-auth-btn'), {},
         this.onAuthSuccess.bind(this),
-        this.onAuthFailure
+        this.onLoginError
       )
     })
   }
@@ -64,10 +64,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscriptions.map(subscription => subscription.unsubscribe());
-  }
-
-  onAuthFailure(e) {
-    console.error(e.error);
   }
 
   onAuthSuccess(user): void {

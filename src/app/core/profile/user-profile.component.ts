@@ -23,8 +23,8 @@ export class UserProfileComponent implements OnDestroy, OnInit, AfterContentInit
     this.subscriptions.push(
       this.auth
         .getUserState()
-        .subscribe(state => {
-          this.profile = state.profile;
+        .subscribe(profile => {
+          this.profile = profile;
         })
     )
   }
