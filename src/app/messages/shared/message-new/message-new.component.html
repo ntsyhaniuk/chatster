@@ -1,9 +1,9 @@
 <div class="new-message">
-  <form class="new-message__form" name="new_message">
-    <textarea class="new-message__text" name="new_message" placeholder="Type something..."></textarea>
-    <i class="fa fa-smile-o" aria-hidden="true"></i>
+  <form class="new-message__form" novalidate #f="ngForm" (ngSubmit)="onSubmit(f.value)" (keydown.control.enter)="sendMessage()">
+    <textarea class="new-message__text" name="ngForm" placeholder="Type something..." [(ngModel)]="message" required></textarea>
+    <i class="fa fa-smile-o" aria-hidden="true" (click)="startConnection()"></i>
   </form>
-  <a class="new-message__send-button">
+  <button class="new-message__send-button" type="submit" (click)="sendMessage()" [disabled]="f.invalid">
     <i class="fa fa-envelope-o" aria-hidden="true"></i>
-  </a>
+  </button>
 </div>

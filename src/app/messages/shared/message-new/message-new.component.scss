@@ -33,8 +33,13 @@
   .new-message__send-button {
     margin-right: 30px;
     font-size: 24px;
+    background: none;
+    border: none;
     color: rgb(152,154,215);
     cursor: pointer;
+    &:disabled{
+      cursor: not-allowed;
+    }
   }
 
 }
