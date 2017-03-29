@@ -3,12 +3,17 @@
     <div class="chat-list__back-button">
       <i class="fa fa-plus" aria-hidden="true"></i>
     </div>
+    <form class="chat_list__search_form" name="search_form">
+      <input type="text" name="search" [(ngModel)]="searchValue">
+      <i class="fa fa-search" aria-hidden="true" *ngIf="!searchValue"></i>
+      <i class="fa fa-times clear" aria-hidden="true" *ngIf="searchValue" (click)="clearSearch()"></i>
+    </form>
     <div class="chat-list__toggle" (click)="listToggle()">
       <i class="fa" [ngClass]="{'fa-arrow-right': isHidden, 'fa-arrow-left': !isHidden}" aria-hidden="true"></i>
     </div>
   </div>
   <ul class="chat-list__chats-container">
-    <li class="chat-item" *ngFor="let chat of chats | async" (click)="select({id: chat.id})">
+    <li class="chat-item" *ngFor="let chat of chats | async | filterChatByName: searchValue" (click)="select({id: chat.id})">
       <div class="chat-item__photo" [style.background]="'url('+chat.image+')'"></div>
       <div class="chat-item__info">
         <h4 class="chat-item__chat-name">{{ chat.name }}</h4>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MessageService } from '../../messages/shared/message.service';
 
 @Component({
   selector: 'ct-chat-details',
@@ -8,4 +9,16 @@ import { Component } from '@angular/core';
 
 export class ChatDetailsComponent {
 
+  private searchValue: string = '';
+
+  constructor(private messageService: MessageService) {}
+
+  private clearSearch(): void {
+    this.searchValue = '';
+    this.messageService.setSeachValue('');
+  }
+
+  private onSearch(value: string): void {
+    this.messageService.setSeachValue(value);
+  }
 }

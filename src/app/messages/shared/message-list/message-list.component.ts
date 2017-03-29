@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { MessageService } from '../message.service';
 import { Message } from '../message.model';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'ct-message-list',
@@ -12,7 +13,8 @@ import { Message } from '../message.model';
 export class MessageListComponent implements OnInit {
 
   chatId: number;
-
+  private searchValue: string = '';
+  private subscription: Subscription;
   messages: Promise<Message[]>;
 
   constructor(private route: ActivatedRoute,
@@ -24,5 +26,8 @@ export class MessageListComponent implements OnInit {
       this.chatId = +params['id'];
       this.messages = this.messageService.getAll(this.chatId);
     })
+    this.subscription = this.messageService
+      .getSearchValue()
+      .subscribe(value => this.searchValue = value)
   }
 }

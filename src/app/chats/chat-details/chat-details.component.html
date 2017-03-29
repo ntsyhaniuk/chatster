@@ -2,8 +2,9 @@
   <div class="chat-details__header">
     <div class="message-search">
       <form class="search_form" name="search_form">
-        <input type="text">
-        <i class="fa fa-search" aria-hidden="true"></i>
+        <input type="text" name="search" [(ngModel)]="searchValue" (ngModelChange)="onSearch($event)">
+        <i class="fa fa-search" aria-hidden="true" *ngIf="!searchValue"></i>
+        <i class="fa fa-times clear" aria-hidden="true" *ngIf="searchValue" (click)="clearSearch()"></i>
       </form>
     </div>
   </div>

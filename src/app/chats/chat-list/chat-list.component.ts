@@ -10,14 +10,20 @@ import {Chat} from '../shared';
 
 export class ChatListComponent {
   @Input() chats: Promise<Chat[]>;
-  isHidden: boolean = false;
+  private isHidden: boolean = false;
+  private searchValue: string = '';
 
   constructor(private router: Router) {
 
   }
 
   select(chat: Chat) {
+    this.searchValue = '';
     this.router.navigate(['chat', chat.id]);
+  }
+
+  clearSearch() {
+    this.searchValue = '';
   }
 
   listToggle() {
