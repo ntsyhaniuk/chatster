@@ -8,7 +8,7 @@ import { Profile } from '../shared';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss']
 })
-export class UserProfileComponent {
+export class UserProfileComponent implements OnInit, OnDestroy{
 
   private profile: Profile;
 
@@ -21,7 +21,9 @@ export class UserProfileComponent {
       this.auth
         .getUserState()
         .subscribe(state => {
-          this.profile = state.profile;
+          console.log('state USER');
+          console.log(state);
+          this.profile = state.user;
         })
     )
   }
