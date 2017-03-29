@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from "rxjs";
-
+import { Profile } from '../../core/shared';
 import { User } from './login-user.interface';
 import { AuthService } from '../../core/auth.service';
 import { config } from '../../../localConfig';
@@ -48,13 +48,18 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   onLoginSuccess(user): void {
-    console.log(user);
-    this.authService.setUserState(user);
+    let profile: Profile = {
+      name: user.username,
+      photo: ''
+    };
+    localStorage.setItem('token', user.username);
+    localStorage.setItem('user_profile', JSON.stringify(profile));
+    this.authService.setUserState(profile);
     this.router.navigate(['/chat']);
   }
 
   onLoginError(e): void {
-
+    console.log(e);
   }
 
   ngOnDestroy() {
@@ -67,7 +72,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   onAuthSuccess(user): void {
     this.zone.run(() => {
-      let self = this;
       let authData = user.getAuthResponse(),
           loggedUser = user.getBasicProfile();
       loggedUser.token = authData.id_token;
@@ -75,8 +79,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         .login(loggedUser, 'google')
         .subscribe(
           (user): void => {
-            console.log('from auth');
-            console.log(user);
             this.authService.setUserState(user);
             this.router.navigate(['/chat']);
           }

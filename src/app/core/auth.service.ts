@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
+import {Router} from '@angular/router';
 
 import { tokenNotExpired } from 'angular2-jwt';
 import {BehaviorSubject, Observable} from 'rxjs';
@@ -18,7 +19,7 @@ export class AuthService {
 
   lock = new Auth0Lock(config.AUTH_API.CLIENT_ID, config.AUTH_API.DOMAIN, {});
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private router: Router) {
     this.lock.on('authenticated', (authResult) => {
       localStorage.setItem('token', authResult.idToken);
       this.lock.getProfile(authResult.idToken, (error: any, profile: any) => {
@@ -27,7 +28,10 @@ export class AuthService {
         }
         profile.token = authResult.idToken;
 
-        this.login(profile, 'auth');
+        this.login(profile, 'auth').subscribe(user=> {
+          this.setUserState(user);
+          this.router.navigate(['/chat']);
+        })
       });
 
       this.lock.hide();
@@ -80,18 +84,20 @@ export class AuthService {
         profile.name = user.name;
         localStorage.setItem('token', user.token);
       } else {
-        profile.name = 'Unnamed profile';
-        localStorage.setItem('token', user.username);
-        localStorage.setItem('user_profile', JSON.stringify(profile));
         return this.http.post(`${config.BACKEND_URL.LOGIN}`, user).map(res => res.json());
       }
       localStorage.setItem('user_profile', JSON.stringify(profile));
-      console.log(profile);
       return Observable.create(observer=> {
         observer.next(profile);
       });
     }
 
+  }
+
+  getUserProfile() {
+    return Observable.create(observer=> {
+      observer.next(JSON.parse(localStorage.getItem('user_profile')));
+    })
   }
 
   logout() {
