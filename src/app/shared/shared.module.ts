@@ -2,7 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterTextComponent } from './filter-text.component';
+
 import { ButtonsModule, AlertModule, DropdownModule } from 'ng2-bootstrap';
+
+import { UsersService } from './services';
 
 @NgModule({
   imports: [
@@ -20,7 +23,7 @@ import { ButtonsModule, AlertModule, DropdownModule } from 'ng2-bootstrap';
   declarations: [
     FilterTextComponent
   ],
-  providers: []
+  providers: [UsersService]
 })
 
 export class SharedModule {

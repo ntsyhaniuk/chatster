@@ -1,1 +1,43 @@
-<h3>Chat New Form</h3>
+<div class="chat-new__wrapper">
+  <div class="chat-new__body">
+    <h1>New chat</h1>
+    <form novalidate #f="ngForm" (ngSubmit)="createChat(f.value)">
+      <div class="form-group">
+        <label for="newChatName">
+          <span>Name</span>
+        </label>
+        <input type="text" class="form-control"
+               id="newChatName" name="newChatName"
+               placeholder="Enter new chat name..." required ngModel>
+        <div class="alert alert-danger"
+             *ngIf="f.controls.newChatName?.invalid && f.controls.newChatName?.touched">
+          Name is required
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="usersList">Select user:</label>
+        <div class="user-items-container" id="usersList">
+          <div class="search-bar">
+            <div class="input-group">
+              <input type="search" name="search" class="form-control"
+                     [(ngModel)]="inputValue" placeholder="Search for..."
+                     (focus)="listToggle(true)" ngModel>
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button" (click)="listToggle(false)">
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+              </span>
+            </div>
+          </div>
+          <div class="user-items-list" *ngIf="isListVisible">
+            <div class="user-item" *ngFor="let user of users"
+            (click)="choseItem(user)">
+              <h3>{{user.username}}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <button class="btn btn-success" type="submit" [disabled]="f.invalid">Create</button>
+  </div>
+</div>
