@@ -7,16 +7,16 @@ import { ChatNewComponent } from './chat-new';
 
 const routes: Routes = [
   {
-    path: 'new',
-    component: ChatNewComponent
-  },
-  {
     path: '',
     component: ChatsComponent,
     children: [
       {
         path: '',
         component: ChatHolderComponent
+      },
+      {
+        path: 'new',
+        component: ChatNewComponent
       },
       {
         path: ':id',

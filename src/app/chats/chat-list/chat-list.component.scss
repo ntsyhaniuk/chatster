@@ -38,7 +38,7 @@
         cursor: pointer;
       }
     }
-    .chat-list__back-button, .chat-list__toggle {
+    .chat-list__add-button, .chat-list__toggle {
       cursor: pointer;
       i {
         font-size: 32px;
@@ -123,7 +123,7 @@
   .chat-list__header {
     flex-direction: row-reverse;
     justify-content: center;
-    .chat-list__back-button, .chat_list__search_form {
+    .chat-list__add-button, .chat_list__search_form {
       display: none;
     }
   }
