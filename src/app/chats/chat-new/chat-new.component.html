@@ -30,7 +30,7 @@
             </div>
           </div>
           <div class="user-items-list" *ngIf="isListVisible">
-            <div class="user-item" *ngFor="let user of users"
+            <div class="user-item" *ngFor="let user of users | filterUsers : inputValue"
             (click)="choseItem(user)">
               <h3>{{user.username}}</h3>
             </div>
