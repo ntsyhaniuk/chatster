@@ -5,6 +5,7 @@ import { Profile } from '../../core/shared';
 import { User } from './login-user.interface';
 import { AuthService } from '../../core/auth.service';
 import { config } from '../../../localConfig';
+import * as io from 'socket.io-client';
 declare const gapi: any;
 
 @Component({
@@ -15,7 +16,11 @@ declare const gapi: any;
 
 export class LoginComponent implements OnInit, OnDestroy {
 
-  constructor (private authService: AuthService, private zone: NgZone, private router: Router) {}
+  socket: SocketIOClient.Socket;
+
+  constructor (private authService: AuthService, private zone: NgZone, private router: Router) {
+    this.socket = io.connect(config.SOCKET.LINK);
+  }
 
 
   private subscriptions: Subscription[] = [];
@@ -33,6 +38,9 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.onLoginError
       )
     })
+    this.socket.on('connect', () => {
+      this.socket.emit('authenticate', { token: localStorage.getItem('token') })
+    });
   }
 
   onSubmit(formData) {
@@ -47,12 +55,14 @@ export class LoginComponent implements OnInit, OnDestroy {
     );
   }
 
-  onLoginSuccess(user): void {
+  onLoginSuccess(data): void {
+    console.log('after login success');
+    console.log(data);
     let profile: Profile = {
-      name: user.username,
+      name: data.user.username,
       photo: ''
     };
-    localStorage.setItem('token', user.username);
+    localStorage.setItem('token', data.token);
     localStorage.setItem('user_profile', JSON.stringify(profile));
     this.authService.setUserState(profile);
     this.router.navigate(['/chat']);

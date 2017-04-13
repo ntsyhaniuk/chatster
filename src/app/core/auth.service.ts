@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
+import {Http, RequestOptions, Headers} from '@angular/http';
 import {Router} from '@angular/router';
 
 import { tokenNotExpired } from 'angular2-jwt';
@@ -84,14 +84,23 @@ export class AuthService {
         profile.name = user.name;
         localStorage.setItem('token', user.token);
       } else {
-        return this.http.post(`${config.BACKEND_URL.LOGIN}`, user).map(res => res.json());
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        return this.http.post(`${config.BACKEND_URL.LOGIN}`, user, options).map(res => res.json());
       }
       localStorage.setItem('user_profile', JSON.stringify(profile));
       return Observable.create(observer=> {
         observer.next(profile);
       });
     }
+  }
 
+  register(user): Observable<any> {
+    const newUser = {
+      username: user.email,
+      pass: user.password
+    };
+    return this.http.post(`${config.BACKEND_URL.SIGNUP}`, newUser);
   }
 
   getUserProfile() {

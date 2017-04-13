@@ -13,7 +13,7 @@ export class MessagesSocketService {
 
 
   get(): Observable<any> {
-    this.socket = io.connect(config.SOCKET.LINK);
+    this.socket = io(config.SOCKET.LINK);
     this.socket.on('connect', ()=> {
       console.log('socket connected');
     });

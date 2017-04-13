@@ -13,13 +13,13 @@ export class MessageNewComponent implements OnInit{
   constructor(private socketService: MessagesSocketService) {}
 
   ngOnInit() {
-    this.socketService.get().subscribe(item=> {
-      console.log(item);
-    })
+
   }
 
   startConnection() {
-    /*this.socketService.connect();*/
+    this.socketService.get().subscribe(item=> {
+     console.log(item);
+     })
   }
 
   sendMessage() {
