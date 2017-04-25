@@ -15,7 +15,7 @@ export class MessagesSocketService {
   get(): Observable<any> {
     this.socket = io(config.SOCKET.LINK);
     this.socket.on('connect', ()=> {
-      console.log('socket connected');
+      this.socket.emit('authenticate', { token: localStorage.getItem('token')})
     });
     this.socket.on('error', (error)=> {
       console.log(error);

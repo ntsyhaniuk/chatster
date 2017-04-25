@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.onAuthSuccess.bind(this),
         this.onLoginError
       )
-    })
+    });
     this.socket.on('connect', () => {
       this.socket.emit('authenticate', { token: localStorage.getItem('token') })
     });
@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   onSubmit(formData) {
     let user: User = {
       username: formData.email,
-      pass: formData.password
+      password: formData.password
     };
     this.subscriptions.push(
       this.authService

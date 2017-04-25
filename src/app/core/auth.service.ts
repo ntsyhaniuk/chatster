@@ -98,7 +98,7 @@ export class AuthService {
   register(user): Observable<any> {
     const newUser = {
       username: user.email,
-      pass: user.password
+      password: user.password
     };
     return this.http.post(`${config.BACKEND_URL.SIGNUP}`, newUser);
   }
