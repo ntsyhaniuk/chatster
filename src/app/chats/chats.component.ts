@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ChatService, Chat } from './shared';
+import { Chat } from './shared';
+import {Observable} from 'rxjs/Observable';
+import {SocketService} from '../shared/services/socket.service';
+
 
 @Component({
   selector: 'chats-wrapper',
@@ -8,9 +11,10 @@ import { ChatService, Chat } from './shared';
 })
 
 export class ChatsComponent implements OnInit {
-  chats: Promise<Chat[]>;
-  constructor(private chatService: ChatService) {}
+  profile = null;
+  chats: Observable<Chat[]>;
+  constructor(private socketService: SocketService) {}
   ngOnInit() {
-    this.chats = this.chatService.getAll();
+    this.chats = this.socketService.getChatList();
   }
 }

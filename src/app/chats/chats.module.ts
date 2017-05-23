@@ -7,7 +7,6 @@ import { ChatNewComponent } from './chat-new';
 import { ChatHolderComponent } from './chat-holder';
 import { ChatsRoutingModule } from './chats-routing.module';
 import { MessagesSharedModule } from '../messages';
-import { ChatService } from './shared/chat.service';
 import { FilterChatByNamePipe } from './shared';
 import { FilterUsersPipe } from './shared';
 
@@ -25,8 +24,7 @@ import { FilterUsersPipe } from './shared';
     SharedModule,
     MessagesSharedModule,
     ChatsRoutingModule
-  ],
-  providers: [ChatService]
+  ]
 })
 
 export class ChatsModule {

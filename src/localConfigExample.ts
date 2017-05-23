@@ -3,7 +3,7 @@ export const config = {
     LINK: 'YOUR LINK'
   },
   BACKEND_URL: {
-    LOGIN: 'YOUR LINK'
+    API: 'YOUR LINK'
   },
   GOOGLE_API: {
     CLIENT_ID: 'YOUR_CLIENT_ID',

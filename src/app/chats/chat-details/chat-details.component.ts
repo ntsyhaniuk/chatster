@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { MessageService } from '../../messages/shared/message.service';
+import {Params, ActivatedRoute, Router} from '@angular/router';
+import {CustomNotificationService} from '../../shared/services/notifications.service';
+import {SocketService} from '../../shared/services/socket.service';
 
 @Component({
   selector: 'ct-chat-details',
@@ -7,18 +10,34 @@ import { MessageService } from '../../messages/shared/message.service';
   styleUrls: ['./chat-details.component.scss']
 })
 
-export class ChatDetailsComponent {
+export class ChatDetailsComponent implements OnInit{
 
-  private searchValue: string = '';
+  public searchValue = '';
+  private chatId = null;
 
-  constructor(private messageService: MessageService) {}
+  constructor(private messageService: MessageService, private route: ActivatedRoute,
+              private router: Router, private socketService: SocketService,
+              private notificationService: CustomNotificationService) {}
 
-  private clearSearch(): void {
+  ngOnInit() {
+    this.route.params.subscribe((params: Params) => {
+      this.chatId = params['id'];
+    });
+  }
+
+  public clearSearch(): void {
     this.searchValue = '';
     this.messageService.setSeachValue('');
   }
 
-  private onSearch(value: string): void {
+  public onSearch(value: string): void {
     this.messageService.setSeachValue(value);
+  }
+
+  public deleteChat(): void {
+    this.socketService.deleteChat(this.chatId).then(res => {
+      this.notificationService.success(res.message);
+      this.router.navigate(['/chat']);
+    });
   }
 }

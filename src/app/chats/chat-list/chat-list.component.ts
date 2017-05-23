@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {Router} from '@angular/router';
 import {Chat} from '../shared';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'ct-chat-list',
@@ -9,18 +9,11 @@ import {Chat} from '../shared';
 })
 
 export class ChatListComponent {
-  @Input() chats: Promise<Chat[]>;
-  private isHidden: boolean = false;
-  private searchValue: string = '';
+  @Input() chats: Observable<Chat[]>;
+  public isHidden = false;
+  private searchValue = '';
 
-  constructor(private router: Router) {
-
-  }
-
-  select(chat: Chat) {
-    this.searchValue = '';
-    this.router.navigate(['chat', chat.id]);
-  }
+  constructor() {}
 
   clearSearch() {
     this.searchValue = '';

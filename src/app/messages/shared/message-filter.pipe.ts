@@ -9,7 +9,7 @@ export class FilterMessagesPipe implements PipeTransform {
   public transform(chats: Message[], filterValue: string) {
     if (chats) {
       return chats.filter(chat => {
-        return chat.text.match(new RegExp(filterValue, 'gi'));
+        return chat.body.match(new RegExp(filterValue, 'gi'));
       });
     } else {
       return chats;

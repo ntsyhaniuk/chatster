@@ -3,9 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterTextComponent } from './filter-text.component';
 
-import { ButtonsModule, AlertModule, DropdownModule } from 'ng2-bootstrap';
+import { ButtonsModule, AlertModule, TooltipModule } from 'ng2-bootstrap';
+
 
 import { UsersService } from './services';
+import { CustomNotificationService } from './services';
+import { SocketService } from './services';
 
 @NgModule({
   imports: [
@@ -13,17 +16,21 @@ import { UsersService } from './services';
     FormsModule,
     ButtonsModule.forRoot(),
     AlertModule.forRoot(),
-    DropdownModule.forRoot()
+    TooltipModule.forRoot()
   ],
   exports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   declarations: [
     FilterTextComponent
   ],
-  providers: [UsersService]
+  providers: [
+    UsersService,
+    CustomNotificationService,
+    SocketService
+  ]
 })
 
 export class SharedModule {

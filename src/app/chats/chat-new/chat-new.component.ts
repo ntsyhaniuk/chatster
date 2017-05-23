@@ -1,6 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { UsersService } from '../../shared';
-import {Subscription} from 'rxjs';
+import {Observable} from 'rxjs/Observable';
+import {Router} from '@angular/router';
+import {CustomNotificationService} from '../../shared/services/notifications.service';
+import {SocketService} from '../../shared/services/socket.service';
 
 @Component({
   selector: 'ct-chat-new',
@@ -8,38 +11,35 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./chat-new.component.scss']
 })
 
-export class ChatNewComponent implements OnInit, OnDestroy {
+export class ChatNewComponent implements OnInit {
 
-  private users: any[] = [];
-  private subscribtions: Subscription[] = [];
-  private isListVisible: boolean = false;
-  private inputValue: string = '';
-  private chosenItem: string = '';
+  private users: Observable<any[]>;
+  private isListVisible = false;
+  public inputValue = '';
+  private chosenRecipient: any = {};
 
-  constructor(private usersService: UsersService) {}
+  constructor(private usersService: UsersService, private socketService: SocketService,
+              private router: Router, private notifications: CustomNotificationService) {}
 
 
   ngOnInit() {
-    this.subscribtions.push(
-      this.usersService.getUsersList().subscribe(users=> {
-        this.users = users;
-        console.log(users);
-      })
-    )
+    this.users =  this.usersService.getUsersList();
   }
 
-  ngOnDestroy() {
-    this.subscribtions.map(subscribtion => subscribtion.unsubscribe());
+  createChat(formData) {
+    const obj = {
+      recipient: this.chosenRecipient,
+      composedMessage: formData.newChatMessage
+    };
+    this.socketService.createNewChat(obj).subscribe( res => {
+      this.router.navigate(['/chat', res.conversationId]);
+    }, err => this.notifications.error(err.message));
   }
 
-
-  createChat(value) {
-    console.log(value);
-  }
-
-  choseItem(item) {
+  choseItem(recipient) {
     this.listToggle(false);
-    this.inputValue = item.username;
+    this.inputValue = recipient.username;
+    this.chosenRecipient = recipient;
   }
 
   listToggle(value: boolean) {

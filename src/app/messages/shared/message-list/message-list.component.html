@@ -1,9 +1,9 @@
 <div class="message-list__wrapper">
-  <ul class="message-list__container">
-    <li class="message-item" *ngFor="let message of messages | async | filterMessages: searchValue; let e = even" [ngClass]="{'interlocutor-message-item': e}">
-      <div class="message-item__photo"></div>
-      <p class="message-item__message" custom-highlight>{{message.text}}</p>
-      <p class="message-item__date-time">{{message.sentAt | date:'medium' }}</p>
+  <ul class="message-list__container" #messagesContainer [scrollTop]="messagesContainer.scrollHeight">
+    <li class="message-item" *ngFor="let message of messages | async | filterMessages: searchValue" [ngClass]="{'interlocutor-message-item': isRecipientMessage(message.author._id)}">
+      <div class="message-item__photo" [style.background]="'url(../../../assets/images/user.png)'"></div>
+      <p class="message-item__message" custom-highlight>{{message.body}}</p>
+      <p class="message-item__date-time">{{message.createdAt | date:'medium' }}</p>
     </li>
   </ul>
 </div>

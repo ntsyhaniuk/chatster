@@ -1,8 +1,12 @@
 export class Message {
-    id: number;
-    text: string;
-    isRead: true;
-    senderId: number;
-    sentAt: Date;
-    chatId: number;
+  _id: string;
+  body: string;
+  createdAt: string;
+  author: {
+    _id: string,
+    profile: {
+      firstName: string,
+      lastName: string
+    }
+  };
 }

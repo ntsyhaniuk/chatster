@@ -2,25 +2,27 @@ import {Injectable} from '@angular/core';
 import {Http, RequestOptions, Headers} from '@angular/http';
 import {Router} from '@angular/router';
 
-import { tokenNotExpired } from 'angular2-jwt';
+// import { tokenNotExpired } from 'angular2-jwt';
 import {BehaviorSubject, Observable} from 'rxjs';
 
 import { config } from '../../localConfig';
 import { Profile } from './shared';
 
-declare const Auth0Lock: any;
+// declare const Auth0Lock: any;
 
 
 @Injectable()
 export class AuthService {
 
-  private _authenticated: boolean = false;
+  redirectUrl: string;
+
+  private _authenticated = false;
   private _state: BehaviorSubject<any> = new BehaviorSubject<any>({});
 
-  lock = new Auth0Lock(config.AUTH_API.CLIENT_ID, config.AUTH_API.DOMAIN, {});
+  // lock = new Auth0Lock(config.AUTH_API.CLIENT_ID, config.AUTH_API.DOMAIN, {});
 
   constructor(private http: Http, private router: Router) {
-    this.lock.on('authenticated', (authResult) => {
+   /* this.lock.on('authenticated', (authResult) => {
       localStorage.setItem('token', authResult.idToken);
       this.lock.getProfile(authResult.idToken, (error: any, profile: any) => {
         if (error) {
@@ -28,14 +30,14 @@ export class AuthService {
         }
         profile.token = authResult.idToken;
 
-        this.login(profile, 'auth').subscribe(user=> {
+        this.login(profile, 'auth').subscribe(user => {
           this.setUserState(user);
           this.router.navigate(['/chat']);
-        })
+        });
       });
 
       this.lock.hide();
-    });
+    });*/
   }
 
 
@@ -50,13 +52,13 @@ export class AuthService {
 
 
   // store the URL so we can redirect after logging in
-  redirectUrl: string;
+
 
   get isLoggedIn(): string {
      return localStorage.getItem('token');
   }
 
-  authLogin() {
+/*  authLogin() {
     // Call the show method to display the widget.
     this.lock.show();
   }
@@ -65,31 +67,31 @@ export class AuthService {
     // Check if there's an unexpired JWT
     // This searches for an item in localStorage with key == 'id_token'
     return tokenNotExpired();
-  }
+  }*/
 
   login(user, from): Observable<any> {
     console.log('user');
     console.log(user);
     if (user) {
-      let profile: Profile = {
+      const profile: Profile = {
         photo: null,
-        name: null
+        fullName: null
       };
       if (from && from === 'google') {
         profile.photo = user.Paa;
-        profile.name = user.ig;
+        profile.fullName = user.ig;
         localStorage.setItem('token', user.token);
-      } else if(from && from === 'auth') {
+      } else if (from && from === 'auth') {
         profile.photo = user.picture;
-        profile.name = user.name;
+        profile.fullName = user.name;
         localStorage.setItem('token', user.token);
       } else {
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
-        return this.http.post(`${config.BACKEND_URL.LOGIN}`, user, options).map(res => res.json());
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+        const options = new RequestOptions({ headers: headers });
+        return this.http.post(`${config.BACKEND_URL.API}/auth/login`, user, options).map(res => res.json());
       }
       localStorage.setItem('user_profile', JSON.stringify(profile));
-      return Observable.create(observer=> {
+      return Observable.create(observer => {
         observer.next(profile);
       });
     }
@@ -97,16 +99,18 @@ export class AuthService {
 
   register(user): Observable<any> {
     const newUser = {
-      username: user.email,
-      password: user.password
+      email: user.email,
+      password: user.password,
+      firstName: user.firstName,
+      lastName: user.lastName
     };
-    return this.http.post(`${config.BACKEND_URL.SIGNUP}`, newUser);
+    return this.http.post(`${config.BACKEND_URL.API}/auth/register`, newUser).map(res => res.json());
   }
 
   getUserProfile() {
-    return Observable.create(observer=> {
+    return Observable.create(observer => {
       observer.next(JSON.parse(localStorage.getItem('user_profile')));
-    })
+    });
   }
 
   logout() {

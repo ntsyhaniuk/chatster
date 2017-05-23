@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from "rxjs";
-import { Profile } from '../../core/shared';
+import { Subscription } from 'rxjs';
 import { User } from './login-user.interface';
 import { AuthService } from '../../core/auth.service';
-import { config } from '../../../localConfig';
-import * as io from 'socket.io-client';
-declare const gapi: any;
+// import { config } from '../../../localConfig';
+import {CustomNotificationService} from '../../shared/services/notifications.service';
+
+// declare const gapi: any;
 
 @Component({
   selector: 'ct-login',
@@ -16,19 +16,18 @@ declare const gapi: any;
 
 export class LoginComponent implements OnInit, OnDestroy {
 
-  socket: SocketIOClient.Socket;
+  subscriptions: Subscription[] = [];
 
-  constructor (private authService: AuthService, private zone: NgZone, private router: Router) {
-    this.socket = io.connect(config.SOCKET.LINK);
+
+
+  constructor (private authService: AuthService, private zone: NgZone, private router: Router,
+               private notifications: CustomNotificationService) {
   }
 
 
-  private subscriptions: Subscription[] = [];
-
-
   ngOnInit() {
-    gapi.load('auth2', () => {
-      let auth2 = gapi.auth2.init({
+/*    gapi.load('auth2', () => {
+      const auth2 = gapi.auth2.init({
         client_id: config.GOOGLE_API.CLIENT_ID,
         cookiepolicy: config.GOOGLE_API.COOKIE_POLICY
       });
@@ -36,59 +35,51 @@ export class LoginComponent implements OnInit, OnDestroy {
         document.getElementById('google-auth-btn'), {},
         this.onAuthSuccess.bind(this),
         this.onLoginError
-      )
-    });
-    this.socket.on('connect', () => {
-      this.socket.emit('authenticate', { token: localStorage.getItem('token') })
-    });
+      );
+    });*/
   }
 
   onSubmit(formData) {
-    let user: User = {
-      username: formData.email,
+    const user: User = {
+      email: formData.email,
       password: formData.password
     };
     this.subscriptions.push(
       this.authService
         .login(user, 'custom')
-        .subscribe(this.onLoginSuccess.bind(this), this.onLoginError)
+        .subscribe(this.onLoginSuccess.bind(this), this.onLoginError.bind(this))
     );
   }
 
   onLoginSuccess(data): void {
-    console.log('after login success');
-    console.log(data);
-    let profile: Profile = {
-      name: data.user.username,
-      photo: ''
-    };
     localStorage.setItem('token', data.token);
-    localStorage.setItem('user_profile', JSON.stringify(profile));
-    this.authService.setUserState(profile);
+    localStorage.setItem('user_profile', JSON.stringify(data.user));
+    this.notifications.success('Login success');
+    this.authService.setUserState(data.user);
     this.router.navigate(['/chat']);
   }
 
   onLoginError(e): void {
-    console.log(e);
+    const error = e.json();
+    this.notifications.error(error.error);
   }
 
   ngOnDestroy() {
     this.subscriptions.map(subscription => subscription.unsubscribe());
   }
 
-  onAuthSuccess(user): void {
+/*  onAuthSuccess(user): void {
     this.zone.run(() => {
-      let authData = user.getAuthResponse(),
+      const authData = user.getAuthResponse(),
           loggedUser = user.getBasicProfile();
       loggedUser.token = authData.id_token;
       this.authService
         .login(loggedUser, 'google')
-        .subscribe(
-          (user): void => {
+        .subscribe((user): void => {
             this.authService.setUserState(user);
             this.router.navigate(['/chat']);
           }
-        )
-    })
-  }
+        );
+    });
+  }*/
 }

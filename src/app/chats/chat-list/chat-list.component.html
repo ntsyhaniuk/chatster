@@ -13,13 +13,17 @@
     </div>
   </div>
   <ul class="chat-list__chats-container">
-    <li class="chat-item" *ngFor="let chat of chats | async | filterChatByName: searchValue" (click)="select({id: chat.id})">
-      <div class="chat-item__photo" [style.background]="'url('+chat.image+')'"></div>
-      <div class="chat-item__info">
-        <h4 class="chat-item__chat-name">{{ chat.name }}</h4>
-        <p class="chat-item__chat-status">{{ chat.status }}</p>
+    <li class="chat-item" *ngFor="let chat of chats | async | filterChatByName: searchValue"
+        [routerLink]="chat._id" routerLinkActive="chat-item__active" (click)="clearSearch()">
+      <div class="chat-item__photo" *ngIf="chat?.image" [style.background]="'url('+chat?.image+')'"></div>
+      <div class="chat-item__photo" *ngIf="!chat?.image" [style.background]="'url(../../../assets/images/user.png)'">
+
       </div>
-      <div class="chat-item__chat-ability">now</div>
+      <div class="chat-item__info">
+        <h4 class="chat-item__chat-name">{{ chat?.recipient }}</h4>
+        <p class="chat-item__chat-status">{{ chat?.message.body }}</p>
+      </div>
+      <div class="chat-item__chat-ability">{{chat?.message.createdAt | date: 'shortTime'}}</div>
     </li>
   </ul>
 </div>

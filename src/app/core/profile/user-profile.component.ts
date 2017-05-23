@@ -11,7 +11,7 @@ import { Profile } from '../shared';
 export class UserProfileComponent implements OnDestroy, OnInit, AfterContentInit {
 
   private profile: Profile = {
-    name: '',
+    fullName: '',
     photo: ''
   };
 
@@ -26,7 +26,7 @@ export class UserProfileComponent implements OnDestroy, OnInit, AfterContentInit
         .subscribe(profile => {
           this.profile = profile;
         })
-    )
+    );
   }
 
   ngOnDestroy() {
@@ -37,10 +37,8 @@ export class UserProfileComponent implements OnDestroy, OnInit, AfterContentInit
     this.subscriptions.push(
       this.auth.getUserProfile()
         .subscribe(profile => {
-          console.log('after loading user profile component');
-          console.log(profile);
-          this.profile = profile;
+          this.profile.fullName = `${profile.firstName} ${profile.lastName}`;
         })
-    )
+    );
   }
 }

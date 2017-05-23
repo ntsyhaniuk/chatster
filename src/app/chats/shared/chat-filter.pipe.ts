@@ -9,11 +9,10 @@ export class FilterChatByNamePipe implements PipeTransform {
   public transform(chats: Chat[], filterValue: string) {
     if (chats) {
       return chats.filter(chat => {
-        return chat.name.match(new RegExp(filterValue, 'gi'));
+        return chat.recipient.match(new RegExp(filterValue, 'gi'));
       });
     } else {
       return chats;
     }
   }
-
 }

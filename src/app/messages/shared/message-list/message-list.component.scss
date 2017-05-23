@@ -20,7 +20,9 @@
         width: 60px;
         height: 60px;
         border-radius: 50%;
-        background-color: aquamarine;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        background-size: cover !important;
       }
       .message-item__message {
         padding: 30px;

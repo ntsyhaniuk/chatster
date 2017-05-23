@@ -35,6 +35,3 @@ testem.log
 #System Files
 .DS_Store
 Thumbs.db
-
-#another files
-/src/localConfig.ts
