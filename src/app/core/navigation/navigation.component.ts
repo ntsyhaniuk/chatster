@@ -13,11 +13,11 @@ export class NavigationComponent {
   constructor(private auth: AuthService,
               private router: Router) {}
 
-  private get isLoggedIn(): string {
+  public get isLoggedIn(): string {
     return this.auth.isLoggedIn;
   }
 
-  private logout(): void {
+  public logout(): void {
     this.auth.logout();
     this.router.navigate(['auth/login']);
   }

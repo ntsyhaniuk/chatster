@@ -11,7 +11,7 @@ import {Observable} from 'rxjs/Observable';
 export class ChatListComponent {
   @Input() chats: Observable<Chat[]>;
   public isHidden = false;
-  private searchValue = '';
+  public searchValue = '';
 
   constructor() {}
 

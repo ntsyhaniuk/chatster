@@ -10,7 +10,7 @@ import { Profile } from '../shared';
 })
 export class UserProfileComponent implements OnDestroy, OnInit, AfterContentInit {
 
-  private profile: Profile = {
+  public profile: Profile = {
     fullName: '',
     photo: ''
   };

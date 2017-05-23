@@ -14,7 +14,7 @@ import {SocketService} from '../../shared/services/socket.service';
 export class ChatNewComponent implements OnInit {
 
   private users: Observable<any[]>;
-  private isListVisible = false;
+  public isListVisible = false;
   public inputValue = '';
   private chosenRecipient: any = {};
 

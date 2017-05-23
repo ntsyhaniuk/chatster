@@ -16,9 +16,9 @@ import {SocketService} from '../../../shared/services/socket.service';
 export class MessageListComponent implements OnInit {
 
   private chatId: number;
-  private searchValue = '';
+  public searchValue = '';
   private subscription: Subscription;
-  private messages: Observable<Message[]>;
+  public messages: Observable<Message[]>;
   private profile = null;
 
   constructor(private route: ActivatedRoute,
