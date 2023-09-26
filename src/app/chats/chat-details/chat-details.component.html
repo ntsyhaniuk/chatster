@@ -1,0 +1,17 @@
+<div class="chat-details">
+  <div class="chat-details__header">
+    <div class="message-search">
+      <form class="search_form" name="search_form">
+        <input type="text" name="search" [(ngModel)]="searchValue" (ngModelChange)="onSearch($event)">
+        <i class="fa fa-search" aria-hidden="true" *ngIf="!searchValue"></i>
+        <i class="fa fa-times clear" aria-hidden="true" *ngIf="searchValue" (click)="clearSearch()"></i>
+      </form>
+    </div>
+    <div class="delete-conversation" tooltip="Delete Chat" placement="left" container="body">
+      <i class="fa fa-trash" aria-hidden="true" (click)="deleteChat()"></i>
+    </div>
+  </div>
+  <ct-message-list></ct-message-list>
+
+  <ct-message-new></ct-message-new>
+</div>

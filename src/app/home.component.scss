@@ -1,0 +1,46 @@
+.home-wrapper, .home-welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  .home-welcome {
+    img {
+      max-width: 100%;
+    }
+  }
+  .home-actions {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    .home-login, .home-register {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 100px;
+      width: 50%;
+      .action-button {
+        width: 100px;
+        height: 40px;
+        margin-top: 20px;
+        background-color: #3b3e99;
+        border: none;
+        border-radius: 5px;
+        color: rgb(255, 255, 255);
+        box-shadow: 3px 3px 12px 1px rgba(0, 0, 0, 0.5);
+        transition: box-shadow 200ms linear;
+        outline: none;
+        &:hover {
+          box-shadow: 5px 5px 12px 2px rgba(0, 0, 0, 0.5);
+        }
+      }
+    }
+    @media (max-width: 1000px) {
+      flex-direction: column;
+      align-items: center;
+      width: 90%;
+      .home-login, .home-register {
+        width: 90%;
+      }
+    }
+  }
+}

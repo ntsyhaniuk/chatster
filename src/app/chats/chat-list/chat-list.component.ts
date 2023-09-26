@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {Chat} from '../shared';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'ct-chat-list',
@@ -7,5 +9,17 @@ import { Component } from '@angular/core';
 })
 
 export class ChatListComponent {
+  @Input() chats: Observable<Chat[]>;
+  public isHidden = false;
+  public searchValue = '';
 
+  constructor() {}
+
+  clearSearch() {
+    this.searchValue = '';
+  }
+
+  listToggle() {
+    this.isHidden = !this.isHidden;
+  }
 }

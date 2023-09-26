@@ -1,0 +1,29 @@
+<div class="chat-list__wrapper" [ngClass]="{'is-hidden': isHidden}">
+  <div class="chat-list__header">
+    <div class="chat-list__add-button" routerLink="new">
+      <i class="fa fa-plus" aria-hidden="true"></i>
+    </div>
+    <form class="chat_list__search_form" name="search_form">
+      <input type="text" name="search" [(ngModel)]="searchValue">
+      <i class="fa fa-search" aria-hidden="true" *ngIf="!searchValue"></i>
+      <i class="fa fa-times clear" aria-hidden="true" *ngIf="searchValue" (click)="clearSearch()"></i>
+    </form>
+    <div class="chat-list__toggle" (click)="listToggle()">
+      <i class="fa" [ngClass]="{'fa-arrow-right': isHidden, 'fa-arrow-left': !isHidden}" aria-hidden="true"></i>
+    </div>
+  </div>
+  <ul class="chat-list__chats-container">
+    <li class="chat-item" *ngFor="let chat of chats | async | filterChatByName: searchValue"
+        [routerLink]="chat._id" routerLinkActive="chat-item__active" (click)="clearSearch()">
+      <div class="chat-item__photo" *ngIf="chat?.image" [style.background]="'url('+chat?.image+')'"></div>
+      <div class="chat-item__photo" *ngIf="!chat?.image" [style.background]="'url(../../../assets/images/user.png)'">
+
+      </div>
+      <div class="chat-item__info">
+        <h4 class="chat-item__chat-name">{{ chat?.recipient }}</h4>
+        <p class="chat-item__chat-status">{{ chat?.message.body }}</p>
+      </div>
+      <div class="chat-item__chat-ability">{{chat?.message.createdAt | date: 'shortTime'}}</div>
+    </li>
+  </ul>
+</div>
